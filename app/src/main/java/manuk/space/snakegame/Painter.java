@@ -1,11 +1,11 @@
-package manuk.space.spacegame;
+package manuk.space.snakegame;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.SurfaceHolder;
 
-import static manuk.space.spacegame.SpaceGame.DEBUG;
+import static manuk.space.snakegame.SnakeGame.DEBUG;
 
 class Painter {
 	private Paint paint;

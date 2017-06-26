@@ -1,4 +1,4 @@
-package manuk.space.spacegame;
+package manuk.space.snakegame;
 
 import android.view.MotionEvent;
 import android.view.View;
