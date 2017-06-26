@@ -11,6 +11,7 @@ public class SpaceGame implements Runnable {
 	public static String DEBUG = "debug string";
 	private boolean running = true;
 	private int width, height;
+	private Paint paint;
 	
 	private SurfaceHolder surfaceHolder;
 	private Controller controller;
@@ -24,6 +25,9 @@ public class SpaceGame implements Runnable {
 		this.controller = controller;
 		player = new Player();
 		projectile = new LList<>();
+		
+		paint = new Paint();
+		paint.setTextSize(40);
 	}
 	
 	private void update() {
@@ -37,24 +41,25 @@ public class SpaceGame implements Runnable {
 	private void draw() {
 		Canvas canvas = surfaceHolder.lockCanvas();
 		if (canvas != null) {
-			int width = canvas.getWidth();
-			int height = canvas.getHeight();
+			canvas.drawRGB(128, 128, 128);
 			
-			int y = (int) (Math.random() * 20) + 100;
-			canvas.drawRGB(0, 128, y);
+			rect(canvas, player.x - player.half, player.y - player.half, player.half * 2, player.half * 2, Color.WHITE);
 			
-			Paint myPaint = new Paint();
-			myPaint.setColor(Color.rgb(0, 0, 0));
-			myPaint.setStrokeWidth(10);
-			canvas.drawRect(100, 100, 200, 200, myPaint);
-			canvas.drawRect(10, 10, 20, 20, myPaint);
-			canvas.drawRect(canvas.getWidth() - 20, canvas.getHeight() - 20, canvas.getWidth() - 10, canvas.getHeight() - 10, myPaint);
-			
-			myPaint.setTextSize(40);
-			canvas.drawText(DEBUG, 0, height - 10, myPaint);
-			
+			paint.setColor(Color.BLACK);
+			canvas.drawRect(10, 10, 20, 20, paint);
+			canvas.drawRect(width - 20, height - 20, width - 10, height - 10, paint);
+			canvas.drawText(DEBUG, 0, height - 10, paint);
 			surfaceHolder.unlockCanvasAndPost(canvas);
 		}
+	}
+	
+	private void rect(Canvas canvas, double x, double y, double width, double height, int color) {
+		paint.setColor(color);
+		float left = (float) (x * this.width);
+		float top = (float) (y * this.height);
+		float right = (float) (left + width * this.width);
+		float bottom = (float) (top + height * this.height);
+		canvas.drawRect(left, top, right, bottom, paint);
 	}
 	
 	private void sleep(long duration) {
