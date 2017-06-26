@@ -1,31 +1,37 @@
 package manuk.space;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import manuk.space.spacegame.Controller;
 import manuk.space.spacegame.SpaceGame;
 
 public class MySurface extends SurfaceView implements SurfaceHolder.Callback {
-	Controller controller;
+	SpaceGame spaceGame;
 	
 	public MySurface(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		SurfaceHolder surfaceHolder = getHolder();
-		surfaceHolder.addCallback(this);
-		controller = new Controller();
+		getHolder().addCallback(this);
+	}
+	
+	public void surfaceCreated(SurfaceHolder surfaceHolder) {
+		Canvas canvas = surfaceHolder.lockCanvas();
+		int width = canvas.getWidth();
+		int height = canvas.getHeight();
+		Controller controller = new Controller(width, height);
 		setOnTouchListener(controller);
-		new Thread(new SpaceGame(surfaceHolder, controller)).start();
+		spaceGame = new SpaceGame(surfaceHolder, controller, width, height);
+		new Thread(spaceGame).start();
+		surfaceHolder.unlockCanvasAndPost(canvas);
 	}
 	
-	public void surfaceCreated(SurfaceHolder holder) {
+	public void surfaceChanged(SurfaceHolder surfaceHolder, int frmt, int w, int h) {
 	}
 	
-	public void surfaceChanged(SurfaceHolder holder, int frmt, int w, int h) {
-	}
-	
-	public void surfaceDestroyed(SurfaceHolder holder) {
+	public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
+		if (spaceGame != null)
+			spaceGame.stop();
 	}
 }

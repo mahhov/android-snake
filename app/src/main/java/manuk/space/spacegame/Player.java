@@ -1,4 +1,5 @@
 package manuk.space.spacegame;
 
-public class Player {
+class Player {
+	double x, y;
 }

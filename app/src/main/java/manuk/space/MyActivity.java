@@ -8,6 +8,4 @@ public class MyActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mylayout);
 	}
-
-
 }
