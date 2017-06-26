@@ -2,25 +2,25 @@ package manuk.space.snakegame;
 
 import android.graphics.Color;
 
-import static android.R.attr.headerBackground;
-import static android.R.attr.width;
 import static manuk.space.snakegame.SnakeGame.BLOCK_HEIGHT;
 import static manuk.space.snakegame.SnakeGame.BLOCK_WIDTH;
 
-class Player {
+class Snake {
 	static final int LEFT = 0, RIGHT = 1, UP = 2, DOWN = 3;
 	static final int[] OPPOSITE = new int[] {RIGHT, LEFT, DOWN, UP};
 	private int direction;
 	private int x, y;
-	private LList<Pos> pos;
+	private LList<Pos> body;
 	private int size;
+	private int foodX, foodY;
 	
-	Player() {
+	Snake() {
 		direction = LEFT;
 		size = 10;
-		pos = new LList<>();
+		body = new LList<>();
 		for (x = 0; x < size; x++)
-			pos.add(new Pos(x, y));
+			body.add(new Pos(x, y));
+		generateFood();
 	}
 	
 	void setDirection(int direction) {
@@ -47,13 +47,25 @@ class Player {
 					y = 0;
 				break;
 		}
-		pos.removeTail();
-		pos.add(new Pos(x, y));
+		if (x == foodX && y == foodY) {
+			size++;
+			generateFood();
+		} else
+			body.removeTail();
+		body.add(new Pos(x, y));
+	}
+	
+	private void generateFood() {
+		do {
+			foodX = (int) (Math.random() * SnakeGame.WIDTH);
+			foodY = (int) (Math.random() * SnakeGame.HEIGHT);
+		} while (false); // todo : do until not generated under snake
 	}
 	
 	void draw(Painter painter) {
-		for (Pos p : pos)
+		for (Pos p : body)
 			painter.drawRect(p.x * BLOCK_WIDTH, p.y * BLOCK_HEIGHT, BLOCK_WIDTH, BLOCK_HEIGHT, Color.WHITE);
+		painter.drawRect(foodX * BLOCK_WIDTH, foodY * BLOCK_HEIGHT, BLOCK_WIDTH, BLOCK_HEIGHT, Color.GREEN);
 	}
 	
 	private class Pos {

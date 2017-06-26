@@ -11,13 +11,13 @@ public class SnakeGame implements Runnable {
 	static final double BLOCK_WIDTH = 1. / WIDTH, BLOCK_HEIGHT = 1. / HEIGHT;
 	private Painter painter;
 	private Controller controller;
-	private Player player;
+	private Snake snake;
 	
 	public SnakeGame(SurfaceHolder surfaceHolder, Controller controller, int width, int height) {
 		this.surfaceHolder = surfaceHolder;
 		painter = new Painter(width, height);
 		this.controller = controller;
-		player = new Player();
+		snake = new Snake();
 	}
 	
 	private void update() {
@@ -26,21 +26,21 @@ public class SnakeGame implements Runnable {
 			boolean centerX = controller.touchX > threshold && controller.touchX < 1 - threshold;
 			boolean centerY = controller.touchY > threshold && controller.touchY < 1 - threshold;
 			if (controller.touchX < threshold && centerY)
-				player.setDirection(Player.LEFT);
+				snake.setDirection(Snake.LEFT);
 			else if (controller.touchX > 1 - threshold && centerY)
-				player.setDirection(Player.RIGHT);
+				snake.setDirection(Snake.RIGHT);
 			else if (controller.touchY < threshold && centerX)
-				player.setDirection(Player.UP);
+				snake.setDirection(Snake.UP);
 			else if (controller.touchY > 1 - threshold && centerX)
-				player.setDirection(Player.DOWN);
+				snake.setDirection(Snake.DOWN);
 			DEBUG = controller.touchX + " " + controller.touchY;
 		}
-		player.update();
+		snake.update();
 	}
 	
 	private void draw() {
 		painter.prep(surfaceHolder);
-		player.draw(painter);
+		snake.draw(painter);
 		painter.post();
 	}
 	
