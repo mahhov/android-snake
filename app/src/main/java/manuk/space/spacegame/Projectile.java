@@ -1,4 +1,4 @@
 package manuk.space.spacegame;
 
-public class Projectile {
+class Projectile {
 }
