@@ -82,6 +82,7 @@ class Snake {
 		if (gameOver) {
 			painter.drawText("GAME OVER :(", .5, .5, Color.GREEN);
 			painter.drawText("Size: " + size, .5, .6, Color.GREEN);
+			painter.drawText("Tap to Restart", .5, .7, Color.GREEN);
 		}
 	}
 	

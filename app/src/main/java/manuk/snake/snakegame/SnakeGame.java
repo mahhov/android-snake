@@ -58,6 +58,8 @@ public class SnakeGame implements Runnable {
 		while (running) {
 			if (!snake.gameOver)
 				update();
+			else if (controller.getTouch())
+				snake = new Snake();
 			draw();
 			sleep(100);
 		}
