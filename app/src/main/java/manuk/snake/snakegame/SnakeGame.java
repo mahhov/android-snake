@@ -2,6 +2,10 @@ package manuk.snake.snakegame;
 
 import android.view.SurfaceHolder;
 
+import static android.R.attr.centerX;
+import static android.R.attr.centerY;
+import static android.view.View.X;
+
 public class SnakeGame implements Runnable {
 	private boolean running = true;
 	private SurfaceHolder surfaceHolder;
@@ -21,17 +25,20 @@ public class SnakeGame implements Runnable {
 	
 	private void update() {
 		if (controller.getTouch()) {
-			double threshold = .1;
-			boolean centerX = controller.touchX > threshold && controller.touchX < 1 - threshold;
-			boolean centerY = controller.touchY > threshold && controller.touchY < 1 - threshold;
-			if (controller.touchX < threshold && centerY)
-				snake.setDirection(Snake.LEFT);
-			else if (controller.touchX > 1 - threshold && centerY)
-				snake.setDirection(Snake.RIGHT);
-			else if (controller.touchY < threshold && centerX)
-				snake.setDirection(Snake.UP);
-			else if (controller.touchY > 1 - threshold && centerX)
-				snake.setDirection(Snake.DOWN);
+			double threshold = .4;
+			double deltaX = controller.touchX > .5 ? 1 - controller.touchX : controller.touchX;
+			double deltaY = controller.touchY > .5 ? 1 - controller.touchY : controller.touchY;
+			if (deltaX < deltaY) {
+				if (controller.touchX < threshold)
+					snake.setDirection(Snake.LEFT);
+				else if (controller.touchX > 1 - threshold)
+					snake.setDirection(Snake.RIGHT);
+			} else {
+				if (controller.touchY < threshold)
+					snake.setDirection(Snake.UP);
+				else if (controller.touchY > 1 - threshold)
+					snake.setDirection(Snake.DOWN);
+			}
 		}
 		snake.update();
 	}
