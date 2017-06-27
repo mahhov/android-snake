@@ -1,9 +1,8 @@
-package manuk.space.snakegame;
+package manuk.snake.snakegame;
 
 import android.view.SurfaceHolder;
 
 public class SnakeGame implements Runnable {
-	static String DEBUG = "debug string";
 	private boolean running = true;
 	private SurfaceHolder surfaceHolder;
 	
@@ -15,7 +14,7 @@ public class SnakeGame implements Runnable {
 	
 	public SnakeGame(SurfaceHolder surfaceHolder, Controller controller, int width, int height) {
 		this.surfaceHolder = surfaceHolder;
-		painter = new Painter(width, height);
+		painter = new Painter(width, width, width, height);
 		this.controller = controller;
 		snake = new Snake();
 	}
@@ -33,7 +32,6 @@ public class SnakeGame implements Runnable {
 				snake.setDirection(Snake.UP);
 			else if (controller.touchY > 1 - threshold && centerX)
 				snake.setDirection(Snake.DOWN);
-			DEBUG = controller.touchX + " " + controller.touchY;
 		}
 		snake.update();
 	}

@@ -1,9 +1,9 @@
-package manuk.space.snakegame;
+package manuk.snake.snakegame;
 
 import android.graphics.Color;
 
-import static manuk.space.snakegame.SnakeGame.BLOCK_HEIGHT;
-import static manuk.space.snakegame.SnakeGame.BLOCK_WIDTH;
+import static manuk.snake.snakegame.SnakeGame.BLOCK_HEIGHT;
+import static manuk.snake.snakegame.SnakeGame.BLOCK_WIDTH;
 
 class Snake {
 	static final int LEFT = 0, RIGHT = 1, UP = 2, DOWN = 3;

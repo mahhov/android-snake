@@ -1,12 +1,12 @@
-package manuk.space;
+package manuk.snake;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import manuk.space.snakegame.Controller;
-import manuk.space.snakegame.SnakeGame;
+import manuk.snake.snakegame.Controller;
+import manuk.snake.snakegame.SnakeGame;
 
 public class MySurface extends SurfaceView implements SurfaceHolder.Callback {
 	SnakeGame snakeGame;

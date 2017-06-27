@@ -1,4 +1,4 @@
-package manuk.space.snakegame;
+package manuk.snake.snakegame;
 
 import java.util.Iterator;
 
