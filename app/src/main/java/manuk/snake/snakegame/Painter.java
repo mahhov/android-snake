@@ -32,13 +32,21 @@ class Painter {
 		surfaceHolder.unlockCanvasAndPost(canvas);
 	}
 	
-	void drawRect(double x, double y, double width, double height, int color) {
+	void drawRect(double x, double y, double width, double height, int color, boolean frame) {
 		paint.setColor(color);
+		if (frame)
+			paint.setStyle(Paint.Style.STROKE);
+		else
+			paint.setStyle(Paint.Style.FILL);
 		float left = (float) (shiftX + x * this.width);
 		float top = (float) (shiftY + y * this.height);
 		float right = (float) (left + width * this.width);
 		float bottom = (float) (top + height * this.height);
 		canvas.drawRect(left, top, right, bottom, paint);
+	}
+	
+	void drawRect(double x, double y, double width, double height, int color) {
+		drawRect(x, y, width, height, color, false);
 	}
 	
 	void drawText(String text, double x, double y, int color) {
