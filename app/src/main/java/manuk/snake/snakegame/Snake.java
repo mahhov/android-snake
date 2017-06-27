@@ -15,7 +15,7 @@ class Snake {
 	private int foodX, foodY;
 	
 	Snake() {
-		direction = LEFT;
+		direction = RIGHT;
 		size = 10;
 		body = new LList<>();
 		for (x = 0; x < size; x++)

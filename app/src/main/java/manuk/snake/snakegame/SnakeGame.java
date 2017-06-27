@@ -20,7 +20,7 @@ public class SnakeGame implements Runnable {
 	}
 	
 	private void update() {
-		if (controller.touch) {
+		if (controller.getTouch()) {
 			double threshold = .1;
 			boolean centerX = controller.touchX > threshold && controller.touchX < 1 - threshold;
 			boolean centerY = controller.touchY > threshold && controller.touchY < 1 - threshold;
@@ -55,7 +55,7 @@ public class SnakeGame implements Runnable {
 		while (running) {
 			update();
 			draw();
-			sleep(10);
+			sleep(100);
 		}
 	}
 	
