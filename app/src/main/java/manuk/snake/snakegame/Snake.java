@@ -79,8 +79,10 @@ class Snake {
 		for (Pos p : body)
 			painter.drawRect(p.x * BLOCK_WIDTH, p.y * BLOCK_HEIGHT, BLOCK_WIDTH, BLOCK_HEIGHT, Color.WHITE);
 		painter.drawRect(foodX * BLOCK_WIDTH, foodY * BLOCK_HEIGHT, BLOCK_WIDTH, BLOCK_HEIGHT, Color.GREEN);
-		if (gameOver)
+		if (gameOver) {
 			painter.drawText("GAME OVER :(", .5, .5, Color.GREEN);
+			painter.drawText("Size: " + size, .5, .6, Color.GREEN);
+		}
 	}
 	
 	private class Pos {
