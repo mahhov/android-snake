@@ -18,6 +18,7 @@ class Painter {
 		shiftY = (fullHeight - height) / 2;
 		paint = new Paint();
 		paint.setTextSize(40);
+		paint.setTextAlign(Paint.Align.CENTER);
 	}
 	
 	void prep(SurfaceHolder surfaceHolder) {

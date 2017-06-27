@@ -18,7 +18,7 @@ class Snake {
 	
 	Snake() {
 		direction = RIGHT;
-		size = 20;
+		size = 10;
 		body = new LList<>();
 		collision = new boolean[SnakeGame.WIDTH][SnakeGame.HEIGHT];
 		for (x = 0; x < size; x++) {
