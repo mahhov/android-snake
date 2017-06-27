@@ -39,4 +39,11 @@ class Painter {
 		float bottom = (float) (top + height * this.height);
 		canvas.drawRect(left, top, right, bottom, paint);
 	}
+	
+	void drawText(String text, double x, double y, int color) {
+		paint.setColor(color);
+		float left = (float) (shiftX + x * this.width);
+		float top = (float) (shiftY + y * this.height);
+		canvas.drawText(text, left, top, paint);
+	}
 }

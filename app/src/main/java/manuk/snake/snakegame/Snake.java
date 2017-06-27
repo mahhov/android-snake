@@ -8,18 +8,23 @@ import static manuk.snake.snakegame.SnakeGame.BLOCK_WIDTH;
 class Snake {
 	static final int LEFT = 0, RIGHT = 1, UP = 2, DOWN = 3;
 	static final int[] OPPOSITE = new int[] {RIGHT, LEFT, DOWN, UP};
+	boolean gameOver;
 	private int direction;
 	private int x, y;
 	private LList<Pos> body;
 	private int size;
 	private int foodX, foodY;
+	private boolean[][] collision;
 	
 	Snake() {
 		direction = RIGHT;
-		size = 10;
+		size = 20;
 		body = new LList<>();
-		for (x = 0; x < size; x++)
+		collision = new boolean[SnakeGame.WIDTH][SnakeGame.HEIGHT];
+		for (x = 0; x < size; x++) {
+			collision[x][y] = true;
 			body.add(new Pos(x, y));
+		}
 		generateFood();
 	}
 	
@@ -50,9 +55,16 @@ class Snake {
 		if (x == foodX && y == foodY) {
 			size++;
 			generateFood();
-		} else
-			body.removeTail();
-		body.add(new Pos(x, y));
+		} else {
+			Pos tailXY = body.removeTail();
+			collision[tailXY.x][tailXY.y] = false;
+		}
+		if (collision[x][y])
+			gameOver = true;
+		else {
+			collision[x][y] = true;
+			body.add(new Pos(x, y));
+		}
 	}
 	
 	private void generateFood() {
@@ -66,6 +78,8 @@ class Snake {
 		for (Pos p : body)
 			painter.drawRect(p.x * BLOCK_WIDTH, p.y * BLOCK_HEIGHT, BLOCK_WIDTH, BLOCK_HEIGHT, Color.WHITE);
 		painter.drawRect(foodX * BLOCK_WIDTH, foodY * BLOCK_HEIGHT, BLOCK_WIDTH, BLOCK_HEIGHT, Color.GREEN);
+		if (gameOver)
+			painter.drawText("GAME OVER :(", .5, .5, Color.GREEN);
 	}
 	
 	private class Pos {

@@ -2,10 +2,6 @@ package manuk.snake.snakegame;
 
 import android.view.SurfaceHolder;
 
-import static android.R.attr.centerX;
-import static android.R.attr.centerY;
-import static android.view.View.X;
-
 public class SnakeGame implements Runnable {
 	private boolean running = true;
 	private SurfaceHolder surfaceHolder;
@@ -60,7 +56,8 @@ public class SnakeGame implements Runnable {
 	public void run() {
 		running = true;
 		while (running) {
-			update();
+			if (!snake.gameOver)
+				update();
 			draw();
 			sleep(100);
 		}

@@ -14,9 +14,10 @@ class LList<T> implements Iterable<T> {
 		head.prev.next = head;
 	}
 	
-	void removeTail() {
+	T removeTail() {
 		tail = tail.next;
 		tail.prev = null;
+		return tail.elem;
 	}
 	
 	public Iterator<T> iterator() {
