@@ -72,7 +72,7 @@ class Snake {
 		do {
 			foodX = (int) (Math.random() * SnakeGame.WIDTH);
 			foodY = (int) (Math.random() * SnakeGame.HEIGHT);
-		} while (false); // todo : do until not generated under snake
+		} while (collision[foodX][foodY]);
 	}
 	
 	void draw(Painter painter) {
