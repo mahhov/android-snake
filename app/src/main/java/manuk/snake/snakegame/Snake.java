@@ -25,6 +25,7 @@ class Snake {
 			collision[x][y] = true;
 			body.add(new Pos(x, y));
 		}
+		x--;
 		generateFood();
 	}
 	
